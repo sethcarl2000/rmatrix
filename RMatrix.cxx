@@ -40,9 +40,9 @@ RMatrix::RMatrix(unsigned int nr, unsigned int nc, const vecd &array)
   if (f_n_elems != array.size()) {
     fprintf(stderr, "Warning in <RMatrix::RMatrix(const vecd &)>: "  
 	  "Array size does not match given matrix dims! Initialzed as all zeros.\n");
-    fElems = vecd(f_n_elems, 0.); 
+    fElems = vector<double>(f_n_elems, 0.); 
   } else { 
-    fElems = vecd(f_n_elems, 0.);
+    fElems = array;
   }
 }
 //_______________________________________________________________________________
@@ -56,9 +56,9 @@ RMatrix::RMatrix(const unsigned int nr,const unsigned int nc, const vecd *array)
   if (nr*nc != array->size()) {
     fprintf(stderr, "Warning in <RMatrix::RMatrix(const vecd*)>: "  
 	  "Array size does not match given matrix dims! Initialzed as all zeros.\n");
-    fElems = vecd(nr*nc,0.); 
+    fElems = vector<double>(f_n_elems, 0.); 
   } else { 
-    fElems = vecd(*array);
+    fElems = *array;
   }
 }
 //_______________________________________________________________________________
@@ -218,9 +218,9 @@ void RMatrix::Print()
   //print the elems of this matrix (for debugging purposes)
   printf("Matrix: %ix%i\n",GetNRows(),GetNCols()); 
 
-  for (unsigned int i=0; i<fnRows; i++) {
-    for (unsigned int j=0; j<fnCols; j++) 
-      printf(" %+0.3e", this->at(i,j) );
+  for (unsigned int i=0; i<GetNRows(); i++) {
+    for (unsigned int j=0; j<GetNCols(); j++) 
+      printf(" %+0.3e", fElems[i*GetNCols() + j] );
     cout << endl;
   } 
 }

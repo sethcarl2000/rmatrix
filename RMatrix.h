@@ -75,7 +75,7 @@ private:
   
   int f_n_elems; 
   std::vector<double> fElems; 
-  
+
   ClassDef(RMatrix,1)
 }; 
 //________________________________________________________________________________
